@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WeiJie Liu - Ph.D. student in Computer Science researching table-to-text generation, text quality evaluation, algorithms, and deep learning.">
+  <title>WeiJie Liu</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1b1f2a;
+      --muted: #5d6679;
+      --paper: #fbfbf8;
+      --surface: #ffffff;
+      --line: #dde3ea;
+      --blue: #1764c8;
+      --green: #177a64;
+      --amber: #b86c12;
+      --shadow: 0 20px 60px rgba(27, 31, 42, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(23, 100, 200, 0.12), transparent 28rem),
+        radial-gradient(circle at 85% 18%, rgba(23, 122, 100, 0.10), transparent 22rem),
+        linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--green);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0 16px;
+    }
+
+    .brand {
+      font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+      gap: clamp(28px, 5vw, 72px);
+      align-items: center;
+      padding: clamp(42px, 8vw, 96px) 0 clamp(28px, 5vw, 60px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+      color: var(--green);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(3.2rem, 9vw, 7.4rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: #252a36;
+      font-size: clamp(1.25rem, 2.2vw, 1.78rem);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 8px 24px rgba(27, 31, 42, 0.06);
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #ffffff;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .portrait {
+      position: relative;
+      width: min(100%, 340px);
+      justify-self: end;
+    }
+
+    .portrait img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      object-fit: cover;
+      background: #eef2f7;
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-note {
+      position: absolute;
+      right: -18px;
+      bottom: -18px;
+      max-width: 220px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 14px 40px rgba(27, 31, 42, 0.12);
+      color: var(--muted);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    main {
+      display: grid;
+      gap: 42px;
+      padding: 10px 0 64px;
+    }
+
+    section {
+      border-top: 1px solid var(--line);
+      padding-top: 34px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: clamp(24px, 5vw, 64px);
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1.55rem, 2.8vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(1.08rem, 1.8vw, 1.35rem);
+    }
+
+    p + p {
+      margin-top: 18px;
+    }
+
+    .research-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+      padding: 0;
+      list-style: none;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .research-list li {
+      min-height: 110px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .research-list strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 22px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .contact a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 26px 0 38px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 800px) {
+      .page {
+        width: min(100% - 28px, 680px);
+      }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 36px;
+      }
+
+      .portrait {
+        width: min(100%, 300px);
+        justify-self: start;
+      }
+
+      .portrait-note {
+        position: static;
+        max-width: none;
+        margin-top: 12px;
+      }
+
+      .section-grid,
+      .research-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 460px) {
+      nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 17vw, 4.6rem);
+      }
+
+      .actions,
+      .contact {
+        flex-direction: column;
+      }
+
+      .button,
+      .contact a {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="#top">WeiJie Liu</a>
+      <nav aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top" aria-label="Introduction">
+      <div>
+        <p class="eyebrow">Computer Science Researcher</p>
+        <h1>WeiJie Liu</h1>
+        <p class="lead">
+          I study mathematics, algorithms, and deep learning, with a focus on
+          building intelligent systems that can better understand and communicate
+          structured information.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="mailto:weijieliu.cs@gmail.com">Email me</a>
+          <a class="button" href="https://github.com/weijieliu-cs">GitHub</a>
+          <a class="button" href="#research">Research interests</a>
+        </div>
+      </div>
+
+      <figure class="portrait">
+        <img src="https://github.com/weijieliu-cs.png" alt="WeiJie Liu profile portrait">
+        <figcaption class="portrait-note">
+          Ph.D. student in Computer Science at Soochow University.
+        </figcaption>
+      </figure>
+    </section>
+
+    <main>
+      <section id="about">
+        <div class="section-grid">
+          <h2>About Me</h2>
+          <div>
+            <p>
+              Hello, I am WeiJie Liu, a researcher passionate about mathematics,
+              algorithms, and deep learning. I am driven to tackle novel,
+              challenging problems and to advance artificial intelligence.
+            </p>
+            <p>
+              Since 2024, I have been pursuing a Ph.D. in Computer Science at
+              <a href="https://www.suda.edu.cn/">Soochow University</a>.
+              My work explores how models can transform structured data into
+              fluent text and how generated text can be evaluated more reliably.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="research">
+        <div class="section-grid">
+          <h2>Research</h2>
+          <div>
+            <p>
+              My research centers on table-to-text generation, text quality
+              evaluation, and interpretable learning systems. I am especially
+              interested in methods that improve models' understanding of
+              structured data while keeping their behavior clear and measurable.
+            </p>
+            <ul class="research-list" aria-label="Research interests">
+              <li>
+                <strong>Table-to-Text Generation</strong>
+                Turning structured records and tables into accurate, readable language.
+              </li>
+              <li>
+                <strong>Text Quality Evaluation</strong>
+                Measuring factuality, fluency, coverage, and usefulness in generated text.
+              </li>
+              <li>
+                <strong>Deep Learning</strong>
+                Developing robust, interpretable models for intelligent systems.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-grid">
+          <h2>Contact</h2>
+          <div>
+            <p>
+              If you are interested in my work, research collaboration, or this
+              blog, feel free to get in touch.
+            </p>
+            <div class="contact" aria-label="Contact links">
+              <a href="mailto:weijieliu.cs@gmail.com">weijieliu.cs@gmail.com</a>
+              <a href="https://github.com/weijieliu-cs">github.com/weijieliu-cs</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; 2026 WeiJie Liu. Built as a single-file GitHub Pages site.
+    </footer>
+  </div>
+</body>
+</html>
