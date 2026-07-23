@@ -16,6 +16,9 @@
       --blue: #1764c8;
       --green: #177a64;
       --amber: #b86c12;
+      --purple: #7d4ff2;
+      --red: #df1f2d;
+      --quote: #dfe4e8;
       --shadow: 0 20px 60px rgba(27, 31, 42, 0.11);
     }
 
@@ -258,6 +261,78 @@
       font-size: 1rem;
     }
 
+    .component-stack {
+      display: grid;
+      gap: clamp(58px, 8vw, 86px);
+      max-width: 560px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .callout {
+      --accent: var(--blue);
+      padding: 8px 0 8px 32px;
+      border-left: 6px solid var(--accent);
+      color: #2b2f38;
+    }
+
+    .callout.note {
+      --accent: #1268dc;
+    }
+
+    .callout.tip {
+      --accent: #1e8a44;
+    }
+
+    .callout.important {
+      --accent: var(--purple);
+    }
+
+    .callout.warning {
+      --accent: #9b6200;
+    }
+
+    .callout.caution {
+      --accent: var(--red);
+    }
+
+    .callout-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      color: var(--accent);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .callout-title svg {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .callout p,
+    .quote-block p {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.35vw, 2rem);
+      line-height: 1.45;
+      font-weight: 400;
+    }
+
+    .quote-block {
+      margin: 0;
+      padding: 4px 0 4px 32px;
+      border-left: 6px solid var(--quote);
+      color: #74787f;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
     .contact {
       display: flex;
       flex-wrap: wrap;
@@ -317,6 +392,10 @@
       .research-list {
         grid-template-columns: 1fr;
       }
+
+      .component-stack {
+        max-width: none;
+      }
     }
 
     @media (max-width: 460px) {
@@ -338,6 +417,11 @@
       .contact a {
         width: 100%;
       }
+
+      .callout,
+      .quote-block {
+        padding-left: 22px;
+      }
     }
   </style>
 </head>
@@ -348,6 +432,7 @@
       <nav aria-label="Primary">
         <a href="#about">About</a>
         <a href="#research">Research</a>
+        <a href="#components">Components</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -420,6 +505,77 @@
                 Developing robust, interpretable models for intelligent systems.
               </li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="components">
+        <div class="section-grid">
+          <h2>Components</h2>
+          <div class="component-stack" aria-label="Callout component examples">
+            <aside class="callout note">
+              <h3 class="callout-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Note</span>
+              </h3>
+              <p>这是一段测试文本</p>
+            </aside>
+
+            <aside class="callout tip">
+              <h3 class="callout-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 18h6"></path>
+                  <path d="M10 22h4"></path>
+                  <path d="M8.7 14.7a7 7 0 1 1 6.6 0c-.8.5-1.3 1.3-1.3 2.3h-4c0-1-.5-1.8-1.3-2.3Z"></path>
+                </svg>
+                <span>Tip</span>
+              </h3>
+              <p>这是一段测试文本</p>
+            </aside>
+
+            <aside class="callout important">
+              <h3 class="callout-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M21 15a3 3 0 0 1-3 3H9l-6 4V6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3Z"></path>
+                  <line x1="12" y1="7" x2="12" y2="11"></line>
+                  <line x1="12" y1="15" x2="12.01" y2="15"></line>
+                </svg>
+                <span>Important</span>
+              </h3>
+              <p>这是一段测试文本</p>
+            </aside>
+
+            <aside class="callout warning">
+              <h3 class="callout-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10.3 4.2 2.7 17.4A2 2 0 0 0 4.4 20h15.2a2 2 0 0 0 1.7-2.6L13.7 4.2a2 2 0 0 0-3.4 0Z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Warning</span>
+              </h3>
+              <p>这是一段测试文本</p>
+            </aside>
+
+            <aside class="callout caution">
+              <h3 class="callout-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8.4 2h7.2L22 8.4v7.2L15.6 22H8.4L2 15.6V8.4Z"></path>
+                  <line x1="12" y1="7" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>Caution</span>
+              </h3>
+              <p>这是一段测试文本</p>
+            </aside>
+
+            <blockquote class="quote-block">
+              <p>这是一段引用文本</p>
+            </blockquote>
           </div>
         </div>
       </section>
